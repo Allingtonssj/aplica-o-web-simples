@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Logar</title>
+        <link rel="stylesheet" href="estilo.css" type="text/css" media="all">
+        <script src="js/jquery.min.js"></script>
+        <script src="js/popper.min.js"></script>
+        <script src="js/vue.js"></script>
+    </head>
+    <body>    
+        <div class="container">
+            <header class="cabeçalho">
+                <div class="divcabeçalho">
+                        <a href="index.html"><input class="botaoc" type="submit" value="Home"></a>
+                        <input class="botaoc" type="submit" value="Página 2">
+                        <input class="botaoc" type="submit" value="Página 3">
+                        <input class="botaoc" type="submit" value="Página 4">
+                        
+                    </div>
+            </header>
+            <div class="corpo">
+                    <section class="corpoLogin">
+                        <div class="login" style="text-align: left">
+                            
+                                <br> <h1><p class="textl">login...</p></h1>
+                                <input class="formlogin" type="text" name="e-mail" maxlength="50" placeholder="E-mail@:" required><br>
+                                <br> <input class="formlogin" type="password" name="senha" maxlength="20" placeholder="Senha:" required><br>
+                                <br><input class="botaol" type="submit" value="Entrar">                     
+                            
+                        </div>
+                        <div id="app" class="cadastro" style="text-align: left">
+                            
+                                <br> <h1><p class="textc">Cadastre-se...</p></h1>            
+                                <input class="formcadastro" type="text" name="nome" maxlength="20" placeholder="Nome:" v-model="usuario.nome" required onsubmit="validar()"><br>
+                                <br> <input class="formcadastro" type="text" name="email" maxlength="50" placeholder="E-mail@:" v-model="usuario.email" required><br>
+                                <br> <input class="formcadastro" type="password" name="password" maxlength="20" placeholder="Senha:" v-model="usuario.senha" required><br>
+                                <br><input class="botao" type="submit" value="adcionar" v-on:click="adicionar(usuario)">
+                                <input class="botao" type="submit" value="remover" v-on:click="remover(usuario)">
+                                <!--<h2 style="margin-top: 10px">itens</h2>
+                                <p v-for="item in itens">Nome: {{usuario.nome}}<br>E-mail: {{usuario.email}}<br></p>  
+                                -->                 
+                            
+                        </div>
+                    </section>
+                </div>
+                <footer>
+                    
+                </footer>
+        </div>
+        <script>
+            function validar(){
+                if(document.nome.value == ""){
+                    alert("digite um nome");
+                    document.nome.focus();
+                }
+            }
+
+            var app = new Vue({
+                el: "#app",
+                data: {
+                    usuario:{
+                        nome: "",
+                        senha: "",
+                        email: "",
+                        telefone: ""
+                    },                   
+                    itens:[]
+                },
+                methods: {
+                    adicionar(str){
+                        if(str != ""){
+                        this.itens.push(str);
+                        alert("usuario adcionado");
+                        }else{
+                            alert("Insira um valor");
+                        }                 
+                        
+                    },
+                    remover(str){
+                        if(str != ""){
+                            var login = this.itens.indexOf(str);
+                            if(login != -1){
+                                this.itens.splice(login, 1);
+                                alert("usuario removido");
+                            }else{
+                                alert("Nao existe");
+                            }
+                        }else{
+                            alert("Insira um valor");
+                        }
+                    }
+                }        
+            });
+        </script>
+    </body>
+</html>
